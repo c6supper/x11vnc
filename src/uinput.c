@@ -489,12 +489,16 @@ int initialize_uinput(void) {
 
 	write(fd, &udev, sizeof(udev));
 
+/*We can't create that node in container*/
+#if 0
 	if (ioctl(fd, UI_DEV_CREATE) != 0) {
 		rfbLog("ioctl(fd, UI_DEV_CREATE) failed.\n");
 		rfbLogPerror("ioctl");
 		close(fd);
 		clean_up_exit(1);
 	}
+#endif
+
 	return 1;
 #endif
 }
